@@ -419,7 +419,7 @@ addpath('/Local/Users/denison/Google Drive/NYU/Projects/Temporal_Attention/Code/
 
 bExpt = 'E0E3E5';
 modality = 'MS';
-b = rd_analyzeBehavPupilSubjects(bExpt,modality,0);
+b = rd_analyzeBehavPupilMSSubjects(bExpt,modality,0);
 bMeasures = {'acc','rt'};
 
 t1colors = {

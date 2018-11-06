@@ -1,4 +1,4 @@
-function [results, subjectInits] = rd_analyzeBehavPupilSubjects(expt, modality, plotFigs)
+function [results, subjectInits, screenInfo] = rd_analyzeBehavPupilMSSubjects(expt, modality, plotFigs)
 
 %% setup
 if nargin==0
@@ -42,7 +42,7 @@ soa2 = 1250;
 run = 9;
 
 normalizeNeutral = 1;
-normalizeMorey = 0;
+normalizeMorey = 1;
 
 saveFigs = 0;
 
@@ -94,6 +94,12 @@ for iSubject = 1:nSubjects
         if strcmp(exptDir, 'E0_cb')
             pE0 = expt.p;
         end
+        
+        % store screen info
+        screenInfo.size(iSubject,:) = expt.p.screenSize;
+        screenInfo.res(iSubject,:) = expt.p.screenRes;
+        screenInfo.viewDist(iSubject,1) = expt.p.viewDist;
+        screenInfo.eyeSlack(iSubject,1) = expt.p.eyeSlack;
     end
     
 %     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

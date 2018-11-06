@@ -4,7 +4,7 @@
 experiment = 'e0e3e5'; %'e0','e3','e5','e0e3','e0e3e5'
 
 saveFileName = sprintf('data/%s/MainSequenceAnalysis.mat', experiment);
-saveAnalysis = false;
+saveAnalysis = true;
 
 %% load data
 switch experiment
@@ -74,6 +74,14 @@ for iSubject = 1:nSubjects
     end
 end
 
+%% calculate average amplitude for each subject
+for iSubject = 1:nSubjects
+    for iM = 1:nM
+        measure = measures{iM};
+        groupData.means.(measure)(iSubject) = mean(groupData.amplitudes{iSubject});
+    end
+end
+
 %% calculate correlation for each subject
 ampAll = []; velAll = [];
 for iSubject = 1:nSubjects
@@ -98,5 +106,12 @@ for iSubject = 1:nSubjects
 end
 xlabel('log amplitude')
 ylabel('log velocity')
+
+%% save
+if saveAnalysis
+    save(saveFileName, 'experiment','subjects','measures','conds',...
+        'groupData','groupDataLog','ampVelCorr','ampAll','velAll',...
+        'ampVelCorrMean','ampVelCorrStd','ampVelAllCorr')
+end
 
 
